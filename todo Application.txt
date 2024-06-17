@@ -1,0 +1,66 @@
+htmlElement.htmlFor = 'value';
+Ex:
+labelEl.htmlElement = 'graduatedCheckbox';
+
+setAttribute();
+To set a value of an attribute for a spectified element we use setAttribute()
+
+Syntax:
+element.setAttribute(attribute, value);
+
+example:
+h1.setAttribute('id', 'heading');
+
+if the attribute already exists the value of the attribute gets updated
+
+
+
+todo undae text ni manam function ki argument lekka pass cheyali
+function createAndAppendTodo(todo){
+  labelEl.texrContent=todo.text
+}
+
+todo objet ni function ki argument lekka pass chestunnam,whenevr req either dot or brackett notation thon aa object nundi  manaki 
+manaki kavalisina text ni tecchukovachu
+anduake textcontent ni etta change chesam 'labelEl.textContent=todo.text'
+
+LOOPS IN JAVASCRIPT
+1.FOR OF LOOP
+2. FOR IN LOOP
+3. FOR LOOP
+4. WHILE LOOP 
+ and many more...
+
+ 1.for..of LOOP
+ syntax:
+ for(let eachItem of iterable){
+    code...
+ }
+
+ ex:
+ let mArray = [1,2,3,4,5]
+ for(let eachItem of mArray){
+  console.log(eachItem)
+ }
+
+
+DrawBack in Todo Application-2 is which ever task is clicked the Initial checkbox is checked/unchecked
+E DrawBack nduk occindi antae manam every item ki todo item text contnet change chesam but dani uniqueId ni change cheyaledu.
+
+TODO APPLICATION-3
+to cover this drawback checkbox id unna daggara oka unique id iccinam;
+STEPS to 'Strikethrough the label Text'
+
+1.Add Required CSS to Strike a Text.
+.checked{
+    text-decoration: line-through;
+}
+2.Specify Unique Id to each label each item
+3. Add Event Listeners to the checkboxes
+4.Change styles of Label Element based on wheather the checkbox checked or not
+
+STEPS TO DELETING A TODO item(The Checkbox and label container should delte when user dels)
+
+1.Specify ID to each todo Item
+2.Add Event Listener to Delete ICOn
+3.Delete Todo item from the todo items container
