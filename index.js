@@ -1,37 +1,23 @@
 let tasksContainerEl = document.getElementById("tasksContainer");
 
-//3.creating a todolist and  multiple ToDo Items
-let todoList=[
-    {
-        text:'Learn HTML',
-        uniqueId:0
-    },
 
-    {
-        text:'Learn CSS',
-        uniqueId:1
-    },
+//11.Storing the TODO List in LOCAL STORAGE WHEN THE BUTTON IS CLICKED
+let saveBtnEl = document.getElementById("saveBtn");
+saveBtnEl.onclick= function(){
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+}
 
-    {
-        text:'Learn BootStrap',
-        uniqueId:2
-    },
-
-    {
-        text:'Learn JavaScript',
-        uniqueId:3
-    },
-
-    {
-        text:'Learn SQL',
-        uniqueId:4
-    },
-    {
-        text:'Learn NodeJs',
-        uniqueId:5
+//12. Getting the Todo List from the From the LOCAL STORAGE
+function getTodoListFromLocalStorage(){
+    let stringifiedTodoList = localStorage.getItem('todoList');
+    let parsedTodoList = JSON.parse(stringifiedTodoList);
+    if(parsedTodoList===null){
+        return[];
+    }else{
+        return parsedTodoList;
     }
-
-]
+}
+let todoList = getTodoListFromLocalStorage();
 
 //6.The below Styles will get applyed when the fuction executes
 function onTodoStatusChange(checkboxId,labelId){
@@ -47,10 +33,12 @@ function onTodoStatusChange(checkboxId,labelId){
 }
 
 
-//8.
+//8.Delete's the Task
 function onDeleteTodo(todoId){
     let todoElement = document.getElementById(todoId);
     tasksContainerEl.removeChild(todoElement)
+    //removes the added list from local storage
+    todoList.pop()
 }
 
 //2. Adding the created Todo  element to the function
@@ -108,9 +96,37 @@ function createAndAppendTodo(todo){
     }
 }
 
+//10.Adds New todo list to the label when the button clicks
+
+function onAddTodo(){
+    let userInputElement = document.getElementById('todoInput');
+    let userInputValue = userInputElement.value;
+    if(userInputValue===''){
+        alert('Enter a Valid Text');
+        return;
+    }
+    let todosCount = todoList.length;
+    todosCount = todosCount+1
+    let newTodo = {
+        text:userInputValue,
+        uniqueId: todosCount
+    };
+    //Add the new todo to the Local Storage
+    todoList.push(newTodo)
+    createAndAppendTodo(newTodo);
+    userInputElement.value="";
+}
+
 //4.Creating todoItems Using for...of Loop
 for(let todo of todoList){
     createAndAppendTodo(todo)
 }
 
 
+
+
+//9.Calls  the next function (10) to add the todo list
+let addTaskBtn  = document.getElementById("addTask");
+addTaskBtn.onclick= function(){
+    onAddTodo();
+}
