@@ -64,3 +64,168 @@ STEPS TO DELETING A TODO item(The Checkbox and label container should delte when
 1.Specify ID to each todo Item
 2.Add Event Listener to Delete ICOn
 3.Delete Todo item from the todo items container
+
+
+STEPS IN ADDING TASKS TO THE TASKS LABEL CONTAINER WHEN THE BUTTON IS clicked
+
+1. ADD EVENT LISTENER TO THE BUTTON
+2.ACCESS THE USER INPUT value
+3.CREATE A NEW TODO ITEM
+
+
+TODO-APPLICATION-4
+
+DrawBack in TODO-APPLICATION-3 is whenevr we reload the Application the tasks we checked or the newly added tasks will get vanished.
+
+TO avoid above drawback manam STOREAGE MECHANISMS.
+STORAGE MECHANISMS ARE  TWO TYPES
+
+1.cLIENT-SIDE DATA STORAGE
+Storing data on the client(User's Machine)
+
+2.Server-side Data Storage.
+storing data on the server using some kind of database
+
+E storage MECHANISMS lo data store cheskuntae data destroy or vanish kadhu unless manam delete chestae tappa.
+
+
+1.CLIENT-SIDE DATA STORAGE MECHANISMS
+1.LOCAL STORAGE
+2.SESSION STORAGE
+3.COOKIES
+4.INDEXEDDB
+            AND MANY MORE........
+
+LOCAL STORAGE.
+
+local storage allows web applications to store data locally within the user's browser.
+deni valla use enti antae manam web application ni reload chesina manam kottaga add chesina data destroy kadhu. 
+aa data local storage lo save cheskuntadhi unless manam data ni delete chestae tappa.
+
+local storage(Storage Object) kuda just like javascript object lekka.
+dentlo data key-value pairs lekka store aytadhi.
+key ki value matram string hae undali it doesnt accept anyother data type other than string
+
+Key:Value
+name:pavan kalyan
+gender:Male
+
+To  access and work with local storage we have below methods.
+
+setItem() => Save Data to Local Storage.
+SYNTAX: localStorage.setItem(key, value);
+EX: localStorage.setItem('Name', 'Rahul');
+
+getItem() => Read Data from Local Storage
+SYNTAX: let lastname = localStorage.getItem(key);
+EX: localStorage.getItem('Name');
+
+clear() => Remove All (Clear Local Storage)
+SYNTAX:localStorage.clear();
+EX: localStorage.clear();
+
+removeItem() =>Remove Data from Local Storage
+SYNTAX: localStorage.removeItem(key);
+localStorage.removeItem('name');
+
+okavela manam oka keyvalue ni set cheyakunda danni retrive cheskoniki getItem() use chestae
+adhi 'null' ani return chestundi.
+
+Anni data types vi values etlanoo 'null' kuda oka value nae.
+null ki typeof() sustae adhi Object ani return chestadhi.
+
+console.log(typeof(null));
+
+E 'null'  ni eppudu use chestam antae manam edhi aina key/edhi aina daniki ki ippudae 
+kakunda tarvta further ga value add chestam anukunnappudu manam e 'null' ni vadukovachu.
+
+EX:
+let selectedColor = null;
+console.log(selectedColor);
+console.log(typeof(selectedColor))
+
+TODO APPLICATION-5
+Local Storage lo manam only String data typena e store cheyachu,but mana application lo 
+different data types unnappudu manam store cheyalem deeni over come cheyaniki manam JSON() ni vadutamm.
+
+JSON ni nduku use chestar antae server side/client side data ni store cheyaniki or  lekuntae aa renditi madhyaloo 
+data ni exchange cheyaniki anna use chestam
+
+JSON SUPPORTED TYPES
+Number/string/Boolean/array/Objects/Null
+
+JS Object vs JSON Object
+
+JS objects
+{
+  name:'Rahul',
+  age:29,
+  designation:'Web developer'
+}
+
+JSON Object
+{
+  "name":"Rahul",
+  "age":29,
+  "Designation": "Web Developer"
+}
+
+javascript object ki and json abject ki difference enti antae js object ki key ni quotes lo mention cheyamu
+but when it comes to JSON Object Keys ni compulsory  double quotes lo mention cheyali
+
+JSON Methods:
+javascript provides JSON Methods to convert Data into Json Format, and the desired data format we Required
+
+1.JSON.stringify()
+it converts the given value into JSON String/OBJect
+Syntax: JSON.stringify(value);
+
+2.JSON.parse()
+it parses a JSON String and returns a JS Object.
+Syntax: JSON.parse(string)
+the string that is passed must be in JSON format
+
+EX:
+
+let profile ={
+    name:'Rahul',
+    age:29,
+    designation:'Web Developer'
+};
+let jsonProfile=JSON.stringify(profile);
+console.log(jsonProfile)
+console.log(typeof(jsonProfile))
+
+let jsProfile = JSON.parse(jsonProfile);
+console.log(jsProfile);
+console.log(typeof(jsProfile))
+
+
+OUTPUT:
+{"name":"Rahul","age":29,"designation":"Web Developer"}
+string
+
+{name: 'Rahul', age: 29, designation: 'Web Developer'}
+object
+
+SETTING AND GETTING THE DATA FROM THE LOCAL STORAGE
+
+let profile ={
+    name:'Rahul',
+    age:29,
+    designation:'Web Developer'
+};
+localStorage.setItem('jsonProfile',JSON.stringify(profile));
+let jsonProfile = localStorage.getItem('jsonProfile');
+console.log(jsonProfile);
+console.log(typeof(jsonProfile))
+let jsProfile = JSON.parse(jsonProfile);
+console.log(jsProfile)
+console.log(typeof(jsProfile));
+
+OUTPUT:
+{"name":"Rahul","age":29,"designation":"Web Developer"}
+string
+
+{name: 'Rahul', age: 29, designation: 'Web Developer'}
+object
