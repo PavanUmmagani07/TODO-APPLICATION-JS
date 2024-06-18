@@ -48,21 +48,21 @@ function onTodoStatusChange(checkboxId,labelId){
 
 
 //8.
-/*function onDeleteTodo(todoId){
+function onDeleteTodo(todoId){
     let todoElement = document.getElementById(todoId);
     tasksContainerEl.removeChild(todoElement)
-}*/
+}
 
 //2. Adding the created Todo  element to the function
 function createAndAppendTodo(todo){
     let checkboxId = 'checkbox'+todo.uniqueId;
     let labelId = "label"+todo.uniqueId;
-    //let todoId = 'todo'+uniqueId;
+    let todoId = 'todos'+todo.uniqueId;
 
     //1.Creating a todo element
     let todoEl = document.createElement('li');
     todoEl.classList.add('task-item', 'd-flex', 'flex-row');
-    //todoEl.id = todoId
+    todoEl.id = todoId;
     tasksContainerEl.appendChild(todoEl);
 
     //creating a checkbox;
@@ -75,7 +75,7 @@ function createAndAppendTodo(todo){
 
     //5.whenever the checkbox And the label  is clicked/unclicked the following function will executes
     checkboxEl.onclick = function(){
-        onTodoStatusChange(checkboxId,labelId)
+        onTodoStatusChange(checkboxId,labelId);
     }
 
     //Creating a label Container
