@@ -20,16 +20,26 @@ function getTodoListFromLocalStorage(){
 let todoList = getTodoListFromLocalStorage();
 
 //6.The below Styles will get applyed when the fuction executes
-function onTodoStatusChange(checkboxId,labelId){
+function onTodoStatusChange(checkboxId,labelId,todoId){
     let checkboxElement = document.getElementById(checkboxId);
     let labelElement = document.getElementById(labelId)
     labelElement.classList.toggle('checked');
-    /*if(checkboxElement.checked===true){
-        labelElement.classList.add('checked');
+
+    let todoObjectIndex = todoList.findIndex(function(eachTodo){
+        let eachTodoId = 'todo'+eachTodo.uniqueId;
+        if(eachTodoId===todoId){
+            return true
+        }else{
+            return false;
+        }
+    });
+    let todoObject = todoList[todoObjectIndex];
+
+    if(todoObject.isChecked===true){
+        todoObject.isChecked = false
+    }else{
+        todoObject.isChecked = true
     }
-    else{
-        labelElement.classList.remove('checked');
-    }*/
 }
 
 
@@ -37,15 +47,23 @@ function onTodoStatusChange(checkboxId,labelId){
 function onDeleteTodo(todoId){
     let todoElement = document.getElementById(todoId);
     tasksContainerEl.removeChild(todoElement)
-    //removes the added list from local storage
-    todoList.pop()
-}
+    //removes the TodoItem from local storage when its deleted on webpage 
+    let deleteIndex = todoList.findIndex(function(eachTodo){
+        let eachTodoId = 'todo'+eachTodo.uniqueId;
+        if(eachTodoId===todoId){
+            return true;
+        }else{
+            return false;
+        }
+    });
+    todoList.splice(deleteIndex,1);
+}   
 
 //2. Adding the created Todo  element to the function
 function createAndAppendTodo(todo){
     let checkboxId = 'checkbox'+todo.uniqueId;
     let labelId = "label"+todo.uniqueId;
-    let todoId = 'todos'+todo.uniqueId;
+    let todoId = 'todo'+todo.uniqueId;
 
     //1.Creating a todo element
     let todoEl = document.createElement('li');
@@ -58,13 +76,12 @@ function createAndAppendTodo(todo){
     checkboxEl.type='checkbox';
     checkboxEl.classList.add('checkbox-input');
     checkboxEl.id = checkboxId;
-    //checkboxEl.id=todo.uniqueId;
-    todoEl.appendChild(checkboxEl);
-
+    checkboxEl.checked = todo.isChecked;
     //5.whenever the checkbox And the label  is clicked/unclicked the following function will executes
     checkboxEl.onclick = function(){
-        onTodoStatusChange(checkboxId,labelId);
+        onTodoStatusChange(checkboxId,labelId,todoId);
     }
+    todoEl.appendChild(checkboxEl);
 
     //Creating a label Container
     let labelContainer = document.createElement('div');
@@ -78,6 +95,9 @@ function createAndAppendTodo(todo){
     labelEl.setAttribute('for', checkboxId);
     labelEl.id = labelId;
     labelEl.textContent = todo.text;
+    if(todo.isChecked===true){
+        labelEl.classList.add('checked');
+    }
     labelContainer.appendChild(labelEl);
 
     //Creating a delete Icon container
@@ -109,7 +129,8 @@ function onAddTodo(){
     todosCount = todosCount+1
     let newTodo = {
         text:userInputValue,
-        uniqueId: todosCount
+        uniqueId: todosCount,
+        isChecked:false
     };
     //Add the new todo to the Local Storage
     todoList.push(newTodo)
